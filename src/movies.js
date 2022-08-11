@@ -2039,6 +2039,7 @@ const cine = [
   },
 ];
 //!############END#OF#DATA Block  (Remove when done)
+//!##Remember to try to make pure functions!
 // Iteration 1: All directors? - Get the array of all directors.
 // _Bonus_: It seems some of the directors had directed multiple movies so they will
 // pop up multiple times in the array of directors.
@@ -2054,8 +2055,17 @@ function getAllDirectors(moviesArray) {
   console.log(directorArr.length);
   return directorArr;
 }
-console.log(getAllDirectors(movies2));
-
+console.log(getAllDirectors(cine));
+//Bonus: clean duplicate directors in Array and return cleaned Arr =>
+function unifyArr(arr) {
+  const unified = arr.filter((el, i) => {
+    return arr.indexOf(el) === i;
+  });
+  return unified;
+}
+const allDirectors = unifyArr(getAllDirectors(cine));
+console.log(allDirectors.length);
+//*### END of Bonus Iteration 1 ###
 // Iteration 2: Steven Spielberg. The best? - How many drama movies did STEVEN SPIELBERG direct?
 function howManyMovies(moviesArray) {}
 
