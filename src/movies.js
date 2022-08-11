@@ -2040,23 +2040,20 @@ const cine = [
 ];
 //!############END#OF#DATA Block  (Remove when done)
 //!##Remember to try to make pure functions!
-// Iteration 1: All directors? - Get the array of all directors.
+//* Iteration 1: All directors? - Get the array of all directors.
 // _Bonus_: It seems some of the directors had directed multiple movies so they will
 // pop up multiple times in the array of directors.
 // How could you "clean" a bit this array and make it unified (without duplicates)?
 
 function getAllDirectors(moviesArray) {
-  console.log(moviesArray.length);
-  console.log(moviesArray[0].director);
-  let directorArr = [];
+  const directorArr = [];
   moviesArray.map((movies) => {
     directorArr.push(movies.director);
   });
-  console.log(directorArr.length);
   return directorArr;
 }
-console.log(getAllDirectors(cine));
-//Bonus: clean duplicate directors in Array and return cleaned Arr =>
+console.log(getAllDirectors(cine).length);
+//*Bonus: clean duplicate directors in Array and return cleaned Arr =>
 function unifyArr(arr) {
   const unified = arr.filter((el, i) => {
     return arr.indexOf(el) === i;
@@ -2066,7 +2063,8 @@ function unifyArr(arr) {
 const allDirectors = unifyArr(getAllDirectors(cine));
 console.log(allDirectors.length);
 //*### END of Bonus Iteration 1 ###
-// Iteration 2: Steven Spielberg. The best? - How many drama movies did STEVEN SPIELBERG direct?
+
+//* Iteration 2: Steven Spielberg. The best? - How many drama movies did STEVEN SPIELBERG direct?
 function howManyMovies(moviesArray) {}
 
 // Iteration 3: All scores average - Get the average of all scores with 2 decimals
