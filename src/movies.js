@@ -2067,9 +2067,7 @@ console.log(allDirectors.length); //* Bonus
 //* Iteration 2: Steven Spielberg. The best? - How many drama movies did STEVEN SPIELBERG direct?
 function howManyMovies(moviesArray) {
   let spielbergDramaMovies = 0;
-  if (!moviesArray.length) {
-    return 0;
-  }
+  if (!moviesArray.length) return 0;
   for (const idx in moviesArray) {
     if (
       moviesArray[idx].director.includes("Steven Spielberg") &&
@@ -2083,15 +2081,46 @@ function howManyMovies(moviesArray) {
 //console.log(howManyMovies([]));
 //console.log(howManyMovies(cine));
 //console.log(howManyMovies(movies2));
-// Iteration 3: All scores average - Get the average of all scores with 2 decimals
-function scoresAverage(moviesArray) {}
 
+//* Iteration 3: All scores average - Get the average of all scores with 2 decimals
+function scoresAverage(moviesArray) {
+  if (!moviesArray.length) return 0;
+  let entrysAmount = 0,
+    sumScores = 0;
+  for (let i = 0; i < moviesArray.length; i++) {
+    sumScores += moviesArray[i].score;
+    entrysAmount++;
+  } // TODO one point mising, avg even if one of the movies does not have score
+  let result = sumScores / entrysAmount;
+  return Math.round((result + Number.EPSILON) * 100) / 100;
+}
+console.log(scoresAverage(cine));
 // Iteration 4: Drama movies - Get the average of Drama Movies
-function dramaMoviesScore(moviesArray) {}
-
+function dramaMoviesScore(moviesArray) {
+  let sumOfDramas = 0,
+    entrysAmount = 0;
+  for (const idx in moviesArray) {
+    if (moviesArray[idx].genre.includes("Drama")) {
+      sumOfDramas += moviesArray[idx].score;
+      entrysAmount += 1;
+    }
+  }
+  if (sumOfDramas === 0) {
+    return 0;
+  } // TODO one point missing with parseFloat
+  let result = parseFloat(sumOfDramas / entrysAmount);
+  return result;
+}
+console.log(dramaMoviesScore(cine));
 // Iteration 5: Ordering by year - Order by year, ascending (in growing order)
-function orderByYear(moviesArray) {}
+console.log(cine[0].year);
+function orderByYear(moviesArray) {
+  const result = [];
 
+  for (let i = 0; i < moviesArray.length; i++) {}
+  return result;
+}
+console.log(orderByYear(cine));
 // Iteration 6: Alphabetic Order - Order by title and print the first 20 titles
 function orderAlphabetically(moviesArray) {}
 
