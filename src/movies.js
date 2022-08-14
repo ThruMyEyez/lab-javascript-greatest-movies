@@ -2083,19 +2083,28 @@ function howManyMovies(moviesArray) {
 //console.log(howManyMovies(movies2));
 
 //* Iteration 3: All scores average - Get the average of all scores with 2 decimals
+//*###*//
 function scoresAverage(moviesArray) {
   if (!moviesArray.length) return 0;
   let entrysAmount = 0,
     sumScores = 0;
-  for (let i = 0; i < moviesArray.length; i++) {
-    sumScores += moviesArray[i].score;
-    entrysAmount++;
-  } // TODO one point mising, avg even if one of the movies does not have score
-  let result = sumScores / entrysAmount;
-  return Math.round((result + Number.EPSILON) * 100) / 100;
+  for (const i in moviesArray) {
+    if (!moviesArray[i].score) {
+      entrysAmount++;
+    } else {
+      sumScores += moviesArray[i].score;
+      entrysAmount++;
+    }
+  }
+  const result = sumScores / entrysAmount;
+  return Math.round(result * 100) / 100;
 }
 console.log(scoresAverage(cine));
+console.log(scoresAverage([{ score: 6 }, { score: "" }, {}]));
+//*###*//
+
 // Iteration 4: Drama movies - Get the average of Drama Movies
+//*###*//
 function dramaMoviesScore(moviesArray) {
   let sumOfDramas = 0,
     entrysAmount = 0;
@@ -2105,27 +2114,56 @@ function dramaMoviesScore(moviesArray) {
       entrysAmount += 1;
     }
   }
-  if (sumOfDramas === 0) {
-    return 0;
-  } // TODO one point missing with parseFloat
-  let result = parseFloat(sumOfDramas / entrysAmount);
+  if (!sumOfDramas) return 0;
+  const result = Math.round((sumOfDramas / entrysAmount) * 100) / 100;
   return result;
 }
 console.log(dramaMoviesScore(cine));
+
 // Iteration 5: Ordering by year - Order by year, ascending (in growing order)
-console.log(cine[0].year);
+//*###*// // 📖 This was a nice one! 💪
 function orderByYear(moviesArray) {
-  const result = [...moviesArray].sort((a, b) => a.year - b.year);
-  console.log(result);
-  console.log();
-  //
-  return result;
+  /*let result = [...moviesArray].sort( 
+    (a, b) => a.year - b.year || b.title - a.title);*/
+  const sorted = [...moviesArray].sort((a, b) => {
+    return a.year < b.year
+      ? -1
+      : a.year > b.year
+      ? 1
+      : a.title < b.title
+      ? -1
+      : 1;
+  });
+  return sorted;
 }
+
+console.log(["first", "second", "third", "artur"].sort());
 console.log(orderByYear(cine));
+console.log(
+  orderByYear([
+    { title: "blaa", year: 1982 },
+    { title: "abc", year: 2002 },
+    { title: "bac", year: 1982 },
+    { title: "aab", year: 1982 },
+  ])
+);
+//*###*//
+
 // Iteration 6: Alphabetic Order - Order by title and print the first 20 titles
+//*###*//
 function orderAlphabetically(moviesArray) {
-  return [];
+  //  const minAmount = 20,
+  const sortedMovieTitles = moviesArray
+    .map((el) => {
+      return el.title;
+    })
+    .sort();
+  return sortedMovieTitles.slice(0, 20);
 }
+/*
+When there would not be a clear instruction that say AFTER sorting, it seems to be better to slice(0, 20) the first elements out and than sorting with exec performance in mind.
+*/
+console.log(orderAlphabetically(cine));
 
 // BONUS - Iteration 7: Time Format - Turn duration of the movies from hours to minutes
 function turnHoursToMinutes(moviesArray) {
