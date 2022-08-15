@@ -1,4 +1,3 @@
-//export
 const movies = [
   {
     title: "The Shawshank Redemption",
@@ -2002,5 +2001,3 @@ const movies = [
     score: 8,
   },
 ];
-//export default movies;
-console.log(movies.length);

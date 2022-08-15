@@ -20,6 +20,16 @@ const singleMovie = [
     score: 9.3,
   },
 ];
+const singleMovie2 = [
+  {
+    title: "The Shawshank Redemption",
+    year: 1994,
+    director: "F. Darabont",
+    duration: "2h",
+    genre: ["Crime"],
+    score: 9.3,
+  },
+];
 const movies2 = [
   {
     title: "The Shawshank Redemption",
@@ -181,16 +191,47 @@ function orderAlphabetically(moviesArray) {
   return sortedMovieTitles.slice(0, 20);
 }
 //*###*//
-
+//! Please check
 //TODO BONUS - Iteration 7: Time Format - Turn duration of the movies from hours to minutes
-function turnHoursToMinutes(moviesArray) {
-  const result = moviesArray.map((el) => {
-    return;
+function turnHoursToMinutes(movArr) {
+  const cpArr = [...movArr];
+
+  const getMinutes = (mArr) => {
+    console.log(mArr.duration.split(" ").length === 1);
+    if (mArr.duration.split(" ").length === 1) {
+      return parseInt(mArr.duration.split("")) * 60;
+    }
+    const h2min =
+      parseInt(mArr.duration.split(" ")[0]) * 60 +
+      parseInt(mArr.duration.split(" ")[1]);
+    return h2min;
+  };
+  const updateDuration = cpArr.map((el) => {
+    el.duration = getMinutes(el);
+    return el;
   });
 
-  return result;
+  console.log(typeof updateDuration[0].duration);
+
+  return updateDuration;
 }
-console.log(singleMovie);
+console.log(typeof turnHoursToMinutes(singleMovie2)[0].duration); //! I dont get it. Why jasmin show me that these are not numbers?
+console.log(turnHoursToMinutes(singleMovie));
+console.log(turnHoursToMinutes(movies2));
+console.log(movies2[0].duration); //! Where does my original variable gets mutated?
+//console.log(turnHoursToMinutes(singleMovie));
+
+//console.log(parseInt(singleMovie[0].duration.split(" ")[0]) * 60);
+
+///const getMinutes = (moviesArray, idx) => {
+///  const h2min =
+///    parseInt(moviesArray[idx].duration.split(" ")[idx]) * 60 +
+///    parseInt(moviesArray[idx].duration.split(" ")[idx + 1]);
+///  console.log(h2min);
+///  moviesArray[idx].duration = h2min;
+///};
+
+//console.log(parseInt(singleMovie[0].duration.split(" ")[1]));
 
 //*✅ BONUS 🎯 🧐  - Iteration 8: Best yearly score average - Best yearly score average
 /*
@@ -209,7 +250,7 @@ function bestYearAvg(movs) {
       .reduce((acc, cur) => {
         console.log(acc);
         console.log(cur[key]);
-        acc[cur[key]] = acc[cur[key]] || []; // if the key is new, initiate its value to an array, otherwise keep its own array value
+        acc[cur[key]] = acc[cur[key]] || []; // if the key is new, initiate value to an array, otherwise keep its own array value
         acc[cur[key]].push(cur);
         console.log(acc);
         return acc;
